@@ -1,0 +1,302 @@
+[
+    {
+        "id": "1",
+        "code": "GCD590",
+        "lineManager": "Quy Pham",
+        "address": "116 Mai Thuc Lan",
+        "gender": "male",
+        "description": "I am Quy",
+        "avatar": [
+            {
+                "url": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTNGXVvM5RZUllNyheM7KJBs8c0eJ1tn35PLcido5hQLlZseigK",
+                "public_id": "sample"
+            }
+        ],
+        "skills": [
+            { "skillname": "JavaScript", "exp": "5 years" },
+            { "skillname": "ReactJS", "exp": "5 years" },
+            { "skillname": "PHP", "exp": "5 years" },
+            { "skillname": "HTML", "exp": "5 years" },
+            { "skillname": "CSS", "exp": "5 years" }
+        ],
+        "createdAt": "2023-12-12T14:50:09.790Z",
+        "phone": "0940222324",
+        "dob": "09-03-2000",
+        "name": "Quy Pham",
+        "isManager": true,
+        "citizen_card": 2000232224,
+        "position": "developer",
+        "email": "phamvanquy@gmail.com",
+        "status": "active",
+        "deletedAt": "2023-12-21T01:11:44.418Z"
+    },
+    {
+        "id": "10",
+        "lineManager": "",
+        "address": "68 Lê Tấn Trung",
+        "code": "DL202310",
+        "gender": "male",
+        "birth": "28-08-1999",
+        "description": "Là 1 người vui tính, hòa đồng có khả năng gắn kết mọi người để có được kết quả tốt nhất",
+        "skills": [
+            { "skillname": "ReactJs", "exp": 3, "addonAfter": "years" },
+            { "skillname": "NodeJs", "exp": 3, "addonAfter": "years" }
+        ],
+        "createdAt": "2023-12-21T01:52:15.717Z",
+        "phone": "0985475687",
+        "name": "Phạm Quý",
+        "isManager": true,
+        "citizen_card": "2333654477",
+        "position": "Devops",
+        "email": "quypham@gmail.com",
+        "avatar": [
+            {
+                "url": "https://res.cloudinary.com/do32v7ajg/image/upload/v1703123453/u6fcj8edoicwipnfm7jc.png"
+            }
+        ],
+        "status": "unassigned"
+    },
+    {
+        "id": "11",
+        "lineManager": "Trần Văn Đại",
+        "address": "116 Mai Thuc Lan",
+        "code": "DL202311",
+        "gender": "female",
+        "birth": "02-02-2000",
+        "description": "ước mơ thành 1 người vĩ đại",
+        "avatar": [
+            {
+                "url": "https://res.cloudinary.com/do32v7ajg/image/upload/v1703124977/cmljmc4buv5maixyi8o5.jpg",
+                "public_id": "cmljmc4buv5maixyi8o5"
+            }
+        ],
+        "skills": [{ "skillname": "C#", "exp": 3, "addonAfter": "years" }],
+        "createdAt": "2023-12-21T02:17:17.533Z",
+        "phone": "0958742561",
+        "name": "Phạm Hòa Đồng",
+        "isManager": false,
+        "citizen_card": "2333211111",
+        "position": "Tester",
+        "email": "hoadong112@gmail.com",
+        "status": "off",
+        "deletedAt": "2023-12-21T03:16:15.199Z"
+    },
+    {
+        "id": "12",
+        "address": "10 Châu Văn Liêm",
+        "code": "DL202312",
+        "gender": "unknown",
+        "birth": "16-05-2003",
+        "skills": [
+            { "skillname": "CSS", "exp": 6, "addonAfter": "months" },
+            { "skillname": "NodeJs", "exp": 2, "addonAfter": "years" }
+        ],
+        "createdAt": "2023-12-21T03:20:50.677Z",
+        "phone": "0961875259",
+        "name": "Tran Van Dai",
+        "isManager": true,
+        "citizen_card": "1231231231",
+        "position": "Tester",
+        "email": "vandai001122@gmail.com",
+        "status": "unassigned",
+        "lineManager": "Phạm Quý",
+        "description": "ước mơ to lớn",
+        "avatar": [
+            {
+                "url": "https://res.cloudinary.com/do32v7ajg/image/upload/v1703128758/gklto6rvejb44uozemto.jpg"
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "lineManager": "Quy Pham",
+        "address": "86 Le Tan Trung",
+        "code": "DL202302",
+        "gender": "male",
+        "birth": "12-12-2023",
+        "description": "dfdfdfdf",
+        "avatar": [
+            {
+                "url": "https://res.cloudinary.com/do32v7ajg/image/upload/v1702392675/udd3gcpjzy4jmmn9ahav.png",
+                "public_id": "udd3gcpjzy4jmmn9ahav"
+            }
+        ],
+        "skills": [{ "skillname": "Reactjs", "exp": 1, "addonAfter": "years" }],
+        "createdAt": "2023-12-12T14:51:33.485Z",
+        "phone": "0912312312",
+        "name": "Quý Phạm",
+        "isManager": true,
+        "citizen_card": "2023444555",
+        "position": "fullstack",
+        "email": "zerot.host@gmail.com",
+        "status": "active",
+        "deletedAt": "2023-12-21T01:11:41.307Z"
+    },
+    {
+        "id": "3",
+        "lineManager": "Quý Phạm",
+        "address": "86 Lê Tấn Trung",
+        "code": "DL202303",
+        "gender": "female",
+        "birth": "25-9-1987",
+        "description": "",
+        "avatar": [
+            {
+                "url": "https://res.cloudinary.com/do32v7ajg/image/upload/v1702625695/qrnkm99tbv6bon7mca5w.png",
+                "public_id": "qrnkm99tbv6bon7mca5w"
+            }
+        ],
+        "skills": [{ "skillname": "ReactJs", "exp": 1, "addonAfter": "years" }],
+        "createdAt": "2023-12-15T07:34:59.893Z",
+        "phone": "0912312312",
+        "name": "Dai Tran",
+        "isManager": false,
+        "citizen_card": "4983334444",
+        "position": "Frontend",
+        "email": "customer@gmail.com",
+        "status": "active",
+        "deletedAt": "2023-12-21T01:11:38.385Z"
+    },
+    {
+        "id": "4",
+        "lineManager": "Quý Phạm",
+        "address": "86 Lê Tấn Trung",
+        "code": "DL202304",
+        "gender": "male",
+        "birth": "18-5-2000",
+        "description": "haha",
+        "avatar": [
+            {
+                "url": "https://res.cloudinary.com/do32v7ajg/image/upload/v1702628101/j5d6w1u06dcxrucyq07c.png",
+                "public_id": "j5d6w1u06dcxrucyq07c"
+            }
+        ],
+        "skills": [{ "skillname": "ReactJs", "exp": 4, "addonAfter": "years" }],
+        "createdAt": "2023-12-15T08:16:51.912Z",
+        "phone": "0888999777",
+        "name": "Hoang Loc",
+        "isManager": true,
+        "citizen_card": "4983334444",
+        "position": "Backend",
+        "email": "admin@ttlx.com",
+        "status": "active",
+        "deletedAt": "2023-12-21T01:11:34.956Z"
+    },
+    {
+        "id": "5",
+        "address": "10 Châu Văn Liêm",
+        "code": "DL202305",
+        "gender": "male",
+        "birth": "20-08-2002",
+        "description": "hòa đồng , thân thiện với mọi người ",
+        "skills": [{ "skillname": "ReactJs", "exp": 1, "addonAfter": "years" }],
+        "createdAt": "2023-12-21T01:14:54.916Z",
+        "phone": "0961870259",
+        "name": "Trần Văn Đại",
+        "isManager": true,
+        "citizen_card": "2333155568",
+        "position": "Frontend",
+        "email": "vandai00112@gmail.com",
+        "lineManager": "Phạm Quý",
+        "avatar": [
+            {
+                "url": "https://res.cloudinary.com/do32v7ajg/image/upload/v1703121193/fxy2vbl7iunr7qecntyy.jpg"
+            }
+        ],
+        "status": "assigned"
+    },
+    {
+        "id": "6",
+        "address": "10 3 tháng 2",
+        "code": "DL202306",
+        "gender": "male",
+        "birth": "22-12-2000",
+        "description": "Có khả năng gắn kết mòi người lại với nhau",
+        "skills": [{ "skillname": "ReactJs", "exp": 1, "addonAfter": "years" }],
+        "createdAt": "2023-12-21T01:18:39.092Z",
+        "phone": "0905321567",
+        "name": "Hồ Xuân Minh",
+        "isManager": false,
+        "citizen_card": "2111544487",
+        "position": "Frontend",
+        "email": "xuanminh112@gmail.com",
+        "avatar": [
+            {
+                "url": "https://res.cloudinary.com/do32v7ajg/image/upload/v1703121468/mxqnelk26v6xeur3ge6c.jpg"
+            }
+        ],
+        "status": "assigned",
+        "lineManager": "Phạm Quý"
+    },
+    {
+        "id": "7",
+        "address": "118 Châu Văn Liêm",
+        "code": "DL202307",
+        "gender": "male",
+        "birth": "12-09-2001",
+        "description": "vui tính với những ước mơ hoài bão",
+        "skills": [
+            { "skillname": "ReactJs", "exp": 4, "addonAfter": "months" }
+        ],
+        "createdAt": "2023-12-21T01:21:08.260Z",
+        "phone": "0965785236",
+        "name": "Nguyễn Hoàng Duy",
+        "isManager": false,
+        "citizen_card": "2666544478",
+        "position": "Frontend",
+        "email": "hoangduy112@gmail.com",
+        "avatar": [
+            {
+                "url": "https://res.cloudinary.com/do32v7ajg/image/upload/v1703121628/mhyw8vtgmi6zti7wmyah.png"
+            }
+        ],
+        "status": "assigned",
+        "lineManager": "Phạm Quý"
+    },
+    {
+        "id": "8",
+        "address": "119 Hùng Vương",
+        "code": "DL202308",
+        "gender": "male",
+        "description": "Mang cho mình trọng trách lớn lao của người con xứ Huế ",
+        "skills": [{ "skillname": "NodeJs", "exp": 1, "addonAfter": "years" }],
+        "createdAt": "2023-12-21T01:23:43.205Z",
+        "phone": "0965478523",
+        "name": "Nguyễn Văn Tú",
+        "isManager": false,
+        "citizen_card": "2455568887",
+        "position": "Frontend",
+        "email": "vantu112@gmail.com",
+        "birth": "11-11-2001",
+        "avatar": [
+            {
+                "url": "https://res.cloudinary.com/do32v7ajg/image/upload/v1703121772/zvp6ocjyht5pcq8hry9e.png"
+            }
+        ],
+        "status": "assigned",
+        "lineManager": "Phạm Quý"
+    },
+    {
+        "id": "9",
+        "address": "12 Mẹ Nhu",
+        "code": "DL202309",
+        "gender": "male",
+        "description": "1 người chăm chỉ với tinh thân lạc quan",
+        "skills": [{ "skillname": "NodeJs", "exp": 1, "addonAfter": "years" }],
+        "createdAt": "2023-12-21T01:27:05.007Z",
+        "phone": "0964875236",
+        "name": "Huỳnh Ngọc Hoàng Lộc",
+        "isManager": false,
+        "citizen_card": "2111564882",
+        "position": "Tester",
+        "email": "lochuynh112@gmail.com",
+        "avatar": [
+            {
+                "url": "https://res.cloudinary.com/do32v7ajg/image/upload/v1703121984/ihy5vmzuuuyrgajr3q1p.jpg"
+            }
+        ],
+        "birth": "10-05-2002",
+        "lineManager": "Phạm Quý",
+        "status": "assigned"
+    }
+]
