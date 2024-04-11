@@ -1,12 +1,12 @@
-const  { getFirestore } =  require('firebase-admin/firestore');
+const { getFirestore } = require('firebase-admin/firestore');
 
 const db = getFirestore();
 
-class EmployeeController {
-    // [POST] /employees
-    async createEmployee(req, res) {
+class TechnologyController {
+    // [POST] /technology
+    async createTechnology(req, res) {
         try {
-            const query = db.collection('employees');
+            const query = db.collection('technology');
             const response = [];
             await query
                 .get()
@@ -24,14 +24,14 @@ class EmployeeController {
                 .then(async (respro) => {
                     const id = response.length + 1;
                     await db
-                        .collection('employees')
+                        .collection('technology')
                         .doc('/' + id + '/')
                         .create({
                             ...req.body,
                             createdAt: new Date().toISOString(),
                         });
                     return res.status(200).send({
-                        msg: 'success',
+                        msg: 'Success',
                         data: {
                             ...req.body,
                             createdAt: new Date().toISOString(),
@@ -44,11 +44,11 @@ class EmployeeController {
         }
     }
 
-    // [GET] /employee/:id
+    // [GET] /technology/:id
 
-    async getOneEmployee(req,res) {
+    async getOneTechnology(req, res) {
         try {
-            const document = db.collection('employees').doc(req.params.id);
+            const document = db.collection('technology').doc(req.params.id);
             const user = await document.get();
             const response = user.data();
             return res.status(200).send(response);
@@ -58,11 +58,11 @@ class EmployeeController {
         }
     }
 
-    // [GET] /employee
+    // [GET] /technology
 
-    async getAllEmployees(req, res) {
+    async getAllTechnology(req, res) {
         try {
-            const query = db.collection('employees');
+            const query = db.collection('technology');
             const response = [];
             await query.get().then((querySnapshot) => {
                 const docs = querySnapshot.docs; // the result of our query
@@ -83,11 +83,11 @@ class EmployeeController {
         }
     }
 
-    // [PATCH] /employee/:id
+    // [PATCH] /technology/:id
 
-    async updateEmployee(req, res) {
+    async updateTechnology(req, res) {
         try {
-            const document = db.collection('employees').doc(req.params.id);
+            const document = db.collection('technology').doc(req.params.id);
             await document.update(req.body);
             return res.status(200).send(req.body);
         } catch (error) {
@@ -95,19 +95,6 @@ class EmployeeController {
             return res.status(500).send(error);
         }
     }
-
-    // [DELETE] /employee/:id
-
-    async deleteEmployee(req, res) {
-         try {
-             const document = db.collection('employees').doc(req.params.id);
-             await document.update({ deletedAt: new Date().toISOString() });
-             return res.status(200).send({ msg: 'success' });
-         } catch (error) {
-             console.log(error);
-             return res.status(500).send(error);
-         }
-    }
 }
 
-module.exports = new EmployeeController();
+module.exports = new TechnologyController();
