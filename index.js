@@ -16,7 +16,7 @@ admin.initializeApp({
 // Setup app dependencies
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 4000;
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const cors = require('cors');
