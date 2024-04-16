@@ -11,6 +11,6 @@ router.get('/:id', projectController.getOneProject);
 
 router.delete('/:id', projectController.deleteProject);
 
-router.patch('/', projectController.updateProject);
+router.patch('/:id', projectController.updateProject);
 
 module.exports = router;

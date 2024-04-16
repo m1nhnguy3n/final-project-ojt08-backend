@@ -9,6 +9,6 @@ router.get('/', skillController.getAllSkill);
 
 router.get('/:id', skillController.getOneSkill);
 
-router.patch('/', skillController.updateSkill);
+router.patch('/:id', skillController.updateSkill);
 
 module.exports = router;

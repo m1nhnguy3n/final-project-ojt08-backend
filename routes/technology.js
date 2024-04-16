@@ -9,6 +9,6 @@ router.get('/', technologyController.getAllTechnology);
 
 router.get('/:id', technologyController.getOneTechnology);
 
-router.patch('/', technologyController.updateTechnology);
+router.patch('/:id', technologyController.updateTechnology);
 
 module.exports = router;

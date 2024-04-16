@@ -9,6 +9,6 @@ router.get('/', trackController.getAllTracking);
 
 router.get('/:id', trackController.getOneTracking);
 
-router.patch('/', trackController.updateTracking);
+router.patch('/:id', trackController.updateTracking);
 
 module.exports = router;

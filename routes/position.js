@@ -9,6 +9,6 @@ router.get('/', positionController.getAllPosition);
 
 router.get('/:id', positionController.getOnePosition);
 
-router.patch('/', positionController.updatePosition);
+router.patch('/:id', positionController.updatePosition);
 
 module.exports = router;
