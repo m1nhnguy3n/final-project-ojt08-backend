@@ -9,8 +9,8 @@ const technologyRouter =require('./technology')
 
 function route(app) {
     app.use('/auth', authRouter);
-    app.use('/employee', employeeRouter);
-    app.use('/project', projectRouter);
+    app.use('/employees', employeeRouter);
+    app.use('/projects', projectRouter);
     app.use('/skill', skillRouter);
     app.use('/tracking', trackingRouter);
     app.use('/position', positionRouter);
