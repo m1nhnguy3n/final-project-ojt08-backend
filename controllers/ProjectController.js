@@ -1,4 +1,5 @@
 const { getFirestore } = require('firebase-admin/firestore');
+const moment = require('moment');
 
 const db = getFirestore();
 
@@ -30,15 +31,13 @@ class ProjectController {
                             ...req.body,
                             createdAt: new Date().toISOString(),
                         });
-                    return res
-                        .status(200)
-                        .send({
-                            msg: 'Success',
-                            data: {
-                                ...req.body,
-                                createdAt: new Date().toISOString(),
-                            },
-                        });
+                    return res.status(200).send({
+                        msg: 'Success',
+                        data: {
+                            ...req.body,
+                            createdAt: new Date().toISOString(),
+                        },
+                    });
                 });
         } catch (error) {
             console.log(error);
@@ -51,8 +50,20 @@ class ProjectController {
     async getOneProject(req, res) {
         try {
             const document = db.collection('projects').doc(req.params.id);
-            const user = await document.get();
-            const response = user.data();
+            let project = await document.get();
+            const response = project.data();
+            const endDate = moment(response.endDate, 'DD/MM/YYYY');
+
+            const now = moment();
+
+            if (now.isAfter(endDate)) {
+                await document.update({
+                    status: 'completed',
+                });
+                project = await document.get();
+                return res.status(200).send(project.data());
+            }
+
             return res.status(200).send(response);
         } catch (error) {
             console.log(error);
@@ -82,7 +93,7 @@ class ProjectController {
         } catch (error) {
             console.log(error);
             return res.status(500).send(error);
-        }   
+        }
     }
 
     // [PATCH] /projects/:id

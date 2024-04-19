@@ -1,0 +1,27 @@
+[
+    {
+        "id": "1",
+        "createdAt": "2023-12-15T07:32:33.471Z",
+        "name": "Frontend"
+    },
+    {
+        "id": "2",
+        "createdAt": "2023-12-15T07:32:36.165Z",
+        "name": "Devops"
+    },
+    {
+        "id": "3",
+        "createdAt": "2023-12-15T07:32:39.294Z",
+        "name": "Tester"
+    },
+    {
+        "id": "4",
+        "createdAt": "2023-12-15T08:15:34.515Z",
+        "name": "Backend"
+    },
+    {
+        "id": "5",
+        "createdAt": "2023-12-21T03:19:49.783Z",
+        "name": "BA"
+    }
+]
