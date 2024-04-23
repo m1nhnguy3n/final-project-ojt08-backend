@@ -1,5 +1,10 @@
 const { getFirestore } = require('firebase-admin/firestore');
 const moment = require('moment');
+const { findDifferences } = require('../helpers/general');
+const {
+    updateEmployeeStatusAfterJoinProject,
+    updateEmployeeStatusAfterLeaveProject,
+} = require('../services/employees.service');
 
 const db = getFirestore();
 
@@ -22,7 +27,7 @@ class ProjectController {
                         response.push(selectedItem);
                     }
                 })
-                .then(async (respro) => {
+                .then(async () => {
                     const id = response.length + 1;
                     await db
                         .collection('projects')
@@ -31,6 +36,24 @@ class ProjectController {
                             ...req.body,
                             createdAt: new Date().toISOString(),
                         });
+
+                    // update employee status after create project
+
+                    const projectData = { ...req.body };
+
+                    const members = projectData.member;
+                    console.log(members);
+
+                    members.forEach(async (member) => {
+                        const memberFound = await db
+                            .collection('employees')
+                            .doc(member.id);
+
+                        await memberFound.update({
+                            status: 'assigned',
+                        });
+                    });
+
                     return res.status(200).send({
                         msg: 'Success',
                         data: {
@@ -101,8 +124,24 @@ class ProjectController {
     async updateProject(req, res) {
         try {
             const document = db.collection('projects').doc(req.params.id);
-            await document.update(req.body);
-            return res.status(200).send(req.body);
+
+            const projectDataUpdated = { ...req.body };
+
+            const membersAfterUpdate = projectDataUpdated.membersChange;
+
+            const membersJoinProject = membersAfterUpdate.filter(
+                (member) => member.isJoin === true
+            );
+
+            const membersLeaveProject = membersAfterUpdate.filter(
+                (member) => member.isLeave === true
+            );
+
+            updateEmployeeStatusAfterJoinProject(membersJoinProject);
+            updateEmployeeStatusAfterLeaveProject(membersLeaveProject);
+            delete projectDataUpdated.membersChange;
+            await document.update(projectDataUpdated);
+            return res.status(200).send(projectDataUpdated);
         } catch (error) {
             console.log(error);
             return res.status(500).send(error);
@@ -114,6 +153,24 @@ class ProjectController {
     async deleteProject(req, res) {
         try {
             const document = db.collection('projects').doc(req.params.id);
+
+            const project = await document.get();
+
+            const projectData = project.data();
+
+            const members = projectData.member;
+
+            // update employee status after delete project
+
+            members.forEach(async (member) => {
+                const employeesData = db.collection('employees').doc(member.id);
+                await employeesData.update({
+                    status: 'unassigned',
+                });
+            });
+
+            // console.log(employees);
+
             await document.update({ deletedAt: new Date().toISOString() });
             return res.status(200).send({ msg: 'Success' });
         } catch (error) {

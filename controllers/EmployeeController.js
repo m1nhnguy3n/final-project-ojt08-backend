@@ -46,7 +46,7 @@ class EmployeeController {
 
     // [GET] /employee/:id
 
-    async getOneEmployee(req,res) {
+    async getOneEmployee(req, res) {
         try {
             const document = db.collection('employees').doc(req.params.id);
             const user = await document.get();
@@ -96,17 +96,35 @@ class EmployeeController {
         }
     }
 
+    // [PATCH] /employee/update-status
+
+    async updateStatusEmployee(req, res) {
+
+        try {
+            // const document = db.collection('employees').doc(req.params.id);
+
+            const memberData = [...req.body]
+            const memberJoin = memberData.filter((member) => member.isJoined === true)
+            console.log(memberJoin)
+            // await document.update(req.body);
+            return res.status(200).send(req.body);
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+    }
+
     // [DELETE] /employee/:id
 
     async deleteEmployee(req, res) {
-         try {
-             const document = db.collection('employees').doc(req.params.id);
-             await document.update({ deletedAt: new Date().toISOString() });
-             return res.status(200).send({ msg: 'success' });
-         } catch (error) {
-             console.log(error);
-             return res.status(500).send(error);
-         }
+        try {
+            const document = db.collection('employees').doc(req.params.id);
+            await document.update({ deletedAt: new Date().toISOString() });
+            return res.status(200).send({ msg: 'success' });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
     }
 }
 

@@ -88,6 +88,7 @@ class TrackingController {
     async updateTracking(req, res) {
         try {
             const document = db.collection('tracking').doc(req.params.id);
+            console.log(req.body);
             await document.update(req.body);
             return res.status(200).send(req.body);
         } catch (error) {

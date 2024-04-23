@@ -13,6 +13,9 @@ router.delete('/:id', employeeController.deleteEmployee);
 
 router.patch('/:id', employeeController.updateEmployee);
 
+router.post('/update-status', employeeController.updateStatusEmployee);
+
+
 
 
 module.exports = router;
