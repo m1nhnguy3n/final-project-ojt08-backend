@@ -1,10 +1,15 @@
 const { getFirestore } = require('firebase-admin/firestore');
 const moment = require('moment');
-const { findDifferences } = require('../helpers/general');
+const {
+    findDifferences,
+    findMembersNotInProject,
+} = require('../helpers/general');
 const {
     updateEmployeeStatusAfterJoinProject,
     updateEmployeeStatusAfterLeaveProject,
 } = require('../services/employees.service');
+
+const { getAllProjects } = require('../services/projects.service');
 
 const db = getFirestore();
 
@@ -152,26 +157,47 @@ class ProjectController {
 
     async deleteProject(req, res) {
         try {
-            const document = db.collection('projects').doc(req.params.id);
+            const document = db.collection('projects');
+            const project = await document.doc(req.params.id).get();
 
-            const project = await document.get();
+            const projectAll = await getAllProjects();
 
             const projectData = project.data();
 
             const members = projectData.member;
 
+            const manager = projectData.manager[0];
+
             // update employee status after delete project
 
-            members.forEach(async (member) => {
-                const employeesData = db.collection('employees').doc(member.id);
-                await employeesData.update({
+            // await document.update({ deletedAt: new Date().toISOString() });
+
+            const projectFilter = projectAll.filter(
+                (item) => !item.deletedAt && !(item.id === req.params.id)
+            );
+
+            const memberNotInProject = findMembersNotInProject(
+                members,
+                projectFilter
+            );
+
+            updateEmployeeStatusAfterLeaveProject(memberNotInProject);
+
+            if (memberNotInProject) {
+                console.log('Member not found in project:', memberNotInProject);
+            } else {
+                console.log('Member found in project.');
+            }
+
+            if (project.manager[0].id !== employee.id) {
+                const employeesData = db
+                    .collection('employees')
+                    .doc(project.manager[0].id);
+                employeesData.update({
                     status: 'unassigned',
                 });
-            });
+            }
 
-            // console.log(employees);
-
-            await document.update({ deletedAt: new Date().toISOString() });
             return res.status(200).send({ msg: 'Success' });
         } catch (error) {
             console.log(error);
