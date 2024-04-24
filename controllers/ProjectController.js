@@ -183,20 +183,20 @@ class ProjectController {
 
             updateEmployeeStatusAfterLeaveProject(memberNotInProject);
 
-            if (memberNotInProject) {
-                console.log('Member not found in project:', memberNotInProject);
-            } else {
-                console.log('Member found in project.');
-            }
+            // if (memberNotInProject) {
+            //     console.log('Member not found in project:', memberNotInProject);
+            // } else {
+            //     console.log('Member found in project.');
+            // }
 
-            if (project.manager[0].id !== employee.id) {
-                const employeesData = db
-                    .collection('employees')
-                    .doc(project.manager[0].id);
-                employeesData.update({
-                    status: 'unassigned',
-                });
-            }
+            // if (project.manager[0].id !== employee.id) {
+            //     const employeesData = db
+            //         .collection('employees')
+            //         .doc(project.manager[0].id);
+            //     employeesData.update({
+            //         status: 'unassigned',
+            //     });
+            // }
 
             return res.status(200).send({ msg: 'Success' });
         } catch (error) {
