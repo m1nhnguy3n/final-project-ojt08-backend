@@ -183,7 +183,7 @@ class ProjectController {
             }
 
             // delete projectDataUpdated.membersChange;
-            // await document.update(projectDataUpdated);
+            await document.update(projectDataUpdated);
             return res.status(200).send(projectDataUpdated);
         } catch (error) {
             console.log(error);
