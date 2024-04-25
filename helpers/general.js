@@ -9,25 +9,43 @@ function findDifferences(arr1, arr2) {
 }
 
 function findMembersNotInProject(members, projectData) {
-    const memberInProject = new Set();
-    // Extract member IDs from the project
-    const projectMemberIds = projectData.map((project) => project.member.id);
-
-    projectData.forEach((project) => {
-        project.member.forEach((member) => memberInProject.add(member.id));
-    });
-
-    // Check if the provided member's ID exists in the project
-
-    const membersNotInProjects = members.filter(
-        (member) => !projectMemberIds.includes(member.id)
+    const memberIdIsDelete = members.map((item) => String(item.id));
+    const memberInProject = [];
+    projectData.filter((project) =>
+        project.member.find((mem) => {
+            if (memberIdIsDelete.includes(String(mem.id))) {
+                memberInProject.push(mem.id);
+            }
+            return memberIdIsDelete.includes(String(mem.id));
+        })
     );
 
-    
-    // const isMemberInProject = projectMemberIds.has(member.id);
-
-    // Return member if not found in the project
-    return membersNotInProjects;
+    return memberIdIsDelete.filter((obj1) => {
+        // Check if any object in arr2 has the same ID as obj1
+        return !memberInProject.some((obj2) => obj1 === obj2);
+    });
 }
 
-module.exports = { findDifferences, findMembersNotInProject };
+function findIsManagerInProject(members, projectData) {
+    const memberIdIsDelete = members.map((item) => String(item.id));
+    const memberInProject = [];
+    projectData.filter((project) =>
+        project.manager.find((man) => {
+            if (memberIdIsDelete.includes(String(man.id))) {
+                memberInProject.push(man.id);
+            }
+            return memberIdIsDelete.includes(String(man.id));
+        })
+    );
+
+    return memberIdIsDelete.filter((obj1) => {
+        // Check if any object in arr2 has the same ID as obj1
+        return !memberInProject.some((obj2) => obj1 === obj2);
+    });
+}
+
+module.exports = {
+    findDifferences,
+    findMembersNotInProject,
+    findIsManagerInProject,
+};

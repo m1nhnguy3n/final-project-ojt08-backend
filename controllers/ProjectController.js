@@ -3,6 +3,7 @@ const moment = require('moment');
 const {
     findDifferences,
     findMembersNotInProject,
+    findIsManagerInProject,
 } = require('../helpers/general');
 const {
     updateEmployeeStatusAfterJoinProject,
@@ -128,9 +129,34 @@ class ProjectController {
 
     async updateProject(req, res) {
         try {
+            const projectDataUpdated = req.body;
+
             const document = db.collection('projects').doc(req.params.id);
 
-            const projectDataUpdated = { ...req.body };
+            const projectCurrent = (await document.get()).data();
+
+            const projectAll = await getAllProjects();
+
+            const projectFilter = projectAll.filter(
+                (item) => !item.deletedAt && !(item.id === req.params.id)
+            );
+
+            const managerIdCur = projectCurrent.manager[0].id;
+
+            const managerInProject = projectFilter.find(
+                (item) =>
+                    item.manager[0].id === managerIdCur ||
+                    item.member.find((mem) => mem.id === managerIdCur)
+            );
+
+            if (!managerInProject) {
+                const employeesData = db
+                    .collection('employees')
+                    .doc(String(managerIdCur));
+                employeesData.update({
+                    status: 'unassigned',
+                });
+            }
 
             const membersAfterUpdate = projectDataUpdated.membersChange;
 
@@ -141,11 +167,23 @@ class ProjectController {
             const membersLeaveProject = membersAfterUpdate.filter(
                 (member) => member.isLeave === true
             );
+            const memberNotInProject = await findMembersNotInProject(
+                membersLeaveProject,
+                projectFilter
+            );
+
+            const managerNotInProject = await findIsManagerInProject(
+                membersLeaveProject,
+                projectFilter
+            );
 
             updateEmployeeStatusAfterJoinProject(membersJoinProject);
-            updateEmployeeStatusAfterLeaveProject(membersLeaveProject);
-            delete projectDataUpdated.membersChange;
-            await document.update(projectDataUpdated);
+            if (!memberNotInProject && !managerNotInProject) {
+                updateEmployeeStatusAfterLeaveProject(membersLeaveProject);
+            }
+
+            // delete projectDataUpdated.membersChange;
+            // await document.update(projectDataUpdated);
             return res.status(200).send(projectDataUpdated);
         } catch (error) {
             console.log(error);
@@ -160,6 +198,8 @@ class ProjectController {
             const document = db.collection('projects');
             const project = await document.doc(req.params.id).get();
 
+            const document2 = db.collection('projects').doc(req.params.id);
+
             const projectAll = await getAllProjects();
 
             const projectData = project.data();
@@ -170,33 +210,42 @@ class ProjectController {
 
             // update employee status after delete project
 
-            // await document.update({ deletedAt: new Date().toISOString() });
+            await document2.update({ deletedAt: new Date().toISOString() });
 
             const projectFilter = projectAll.filter(
                 (item) => !item.deletedAt && !(item.id === req.params.id)
             );
 
-            const memberNotInProject = findMembersNotInProject(
+            const memberNotInProject = await findMembersNotInProject(
                 members,
                 projectFilter
             );
 
-            updateEmployeeStatusAfterLeaveProject(memberNotInProject);
+            if (memberNotInProject && memberNotInProject.length > 0) {
+                memberNotInProject.forEach((e) => {
+                    const employeesData = db
+                        .collection('employees')
+                        .doc(String(e));
+                    employeesData.update({
+                        status: 'unassigned',
+                    });
+                });
+            }
 
-            // if (memberNotInProject) {
-            //     console.log('Member not found in project:', memberNotInProject);
-            // } else {
-            //     console.log('Member found in project.');
-            // }
+            const managerInProject = projectFilter.find(
+                (item) =>
+                    item.manager[0].id === manager.id ||
+                    item.member.find((mem) => mem.id === manager.id)
+            );
 
-            // if (project.manager[0].id !== employee.id) {
-            //     const employeesData = db
-            //         .collection('employees')
-            //         .doc(project.manager[0].id);
-            //     employeesData.update({
-            //         status: 'unassigned',
-            //     });
-            // }
+            if (!managerInProject) {
+                const employeesData = db
+                    .collection('employees')
+                    .doc(String(manager.id));
+                employeesData.update({
+                    status: 'unassigned',
+                });
+            }
 
             return res.status(200).send({ msg: 'Success' });
         } catch (error) {
